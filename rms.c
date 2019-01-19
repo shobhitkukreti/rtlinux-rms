@@ -180,7 +180,10 @@ struct cpu_util{
 struct cpu_util util_cpu[4];
 
 
-/* Simple bubble sort for WFD */
+/* 	change to heap/tree
+*	Worst Fit Decreasing
+*
+*/
 
 void bsort(struct cpu_util *arr, int n)
 {
