@@ -10,6 +10,16 @@ The scheduling methodoloy hijacks the context_switch() function to get the struc
 The tasks sets are scheduled per core following Worst Fit Descreasing scheme. 
 To schedule a task set, a RT test needs to be employed before setting processor affinity.
 
+![Result](./rt.png)
+
+P : Process ID<br>
+RC : Total Worst Case Execution Time in ms:ns<br>
+RT : Total Time Period in ms:ns<br>
+pre: Total Context Switches when the process was swapped out or swapped in<br>
+C : Process Worst Case Execution Time<br>
+T : Time Period of the Process<br>
+
+
 #### Further work: 
 	1. Define Scheduler Class and integrate with Linux Sched Code.
 	2. Cleanup the Code. 	
