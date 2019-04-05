@@ -1,11 +1,11 @@
-/*!
- * \brief 	    Header File containing macros and structs for implementing Real
- *				Time Linux (Rate Monotonic Scheduling)
- *		        
- * \author      Shobhit Kukreti
- * \date       
- * \file        rtsys.h
- * \issue       
+/*
+ * \brief	Header File containing macros and structs for implementing Real
+ *		Time Linux (Rate Monotonic Scheduling)
+ *
+ * \author	Shobhit Kukreti
+ * \date
+ * \file	rtsys.h
+ * \issue
  */
 
 #ifndef RTSYS_H_
@@ -54,7 +54,7 @@ struct wq_sysfs {
 };
 
 
-struct reservation_timer {
+struct reservation_timer{
 	bool active;
 	bool fired;
 	struct	timespec rawtime, ts;
@@ -65,23 +65,21 @@ struct reservation_timer {
 typedef struct reservation_timer rsv_t;
 
 
-struct exynos_queue
-{
-    struct task_struct *tsk;
-    struct exynos_queue *next, *prev, *cpuq;
-	int utils, cpu; /* Total is 1000 */	
-    struct timespec cts, pts, ets, rawts, rawets, rawpts;
+struct exynos_queue{
+	struct task_struct *tsk;
+	struct exynos_queue *next, *prev, *cpuq;
+	int utils, cpu; /* Total is 1000 */
+	struct timespec cts, pts, ets, rawts, rawets, rawpts;
 	spinlock_t lock;
 	int state, ctimer_state, ptimer_state, raised_exit;
-	int e_time, c_time, p_time; 
-    pid_t pid;
+	int e_time, c_time, p_time;
+	pid_t pid;
 	struct kobject pid_kobj;
 	struct proc_attr file_attr;
 	struct attribute *attr_grp[2];
 	struct kobj_type sysfs_file;
 	rsv_t tmr_c, tmr_p;
 	struct wq_sysfs sysfs_wq;
-
 };
 
 
