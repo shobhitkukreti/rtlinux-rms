@@ -54,7 +54,7 @@ struct wq_sysfs {
 };
 
 
-struct reservation_timer{
+struct reservation_timer {
 	bool active;
 	bool fired;
 	struct	timespec rawtime, ts;
@@ -65,7 +65,7 @@ struct reservation_timer{
 typedef struct reservation_timer rsv_t;
 
 
-struct exynos_queue{
+struct exynos_queue {
 	struct task_struct *tsk;
 	struct exynos_queue *next, *prev, *cpuq;
 	int utils, cpu; /* Total is 1000 */
@@ -95,10 +95,10 @@ int assign_task_core(sched_queue *cpu, int core);
 
 void os_tick_update(void);
 void os_callback(void);
-int c_callback(sched_queue *);
-int p_callback(sched_queue *);
-int rsv_timer_start(rsv_t *, int msleep);
-unsigned long long rsv_timer_cancel(rsv_t *, struct timespec);
+int c_callback(sched_queue *q);
+int p_callback(sched_queue *q);
+int rsv_timer_start(rsv_t *rs, int msleep);
+unsigned long long rsv_timer_cancel(rsv_t *rs, struct timespec ts);
 int os_core_timer_init(void);
 int os_core_timer_cancel(void);
 bool if_tmr_active(rsv_t *tmr);

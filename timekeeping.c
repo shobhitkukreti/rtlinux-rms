@@ -20,14 +20,15 @@ static int first_entry;
 struct timespec diff_timespec(struct timespec tm1, struct timespec tm2)
 {
 	struct	timespec result;
- if ((tm1.tv_sec < tm2.tv_sec) || ((tm1.tv_sec == tm2.tv_sec) && (tm1.tv_nsec <=
-				 tm2.tv_nsec))){ /* TIME1 <= TIME2? */
-	 result.tv_sec = result.tv_nsec = 0;
-	}	else{
+if ((tm1.tv_sec < tm2.tv_sec) || ((tm1.tv_sec == tm2.tv_sec) && (tm1.tv_nsec <=
+	tm2.tv_nsec))){ /* TIME1 <= TIME2? */
+		result.tv_sec = result.tv_nsec = 0;
+	} else {
 		/* TIME1 > TIME2 */
-		result.tv_sec = tm1.tv_sec - tm2.tv_sec ;
-		 if (tm1.tv_nsec < tm2.tv_nsec) {
-			result.tv_nsec = tm1.tv_nsec +  1000000000L - tm2.tv_nsec;
+		result.tv_sec = tm1.tv_sec - tm2.tv_sec;
+		if (tm1.tv_nsec < tm2.tv_nsec) {
+			result.tv_nsec = tm1.tv_nsec +
+				1000000000L - tm2.tv_nsec;
 			result.tv_sec--;
 			/*Borrow a second.*/
 			}	else{
@@ -55,8 +56,8 @@ void os_tick_update(void)
 		prev_ts.tv_nsec = ts.tv_nsec;
 		first_entry = 1;
 		return;
-	}	else
-			getrawmonotonic(&ts);
+	} else
+		getrawmonotonic(&ts);
 
 	diffts = diff_timespec(ts, prev_ts);
 	prev_ts.tv_sec = ts.tv_sec;
@@ -113,7 +114,7 @@ void os_callback(void)
 
 
 /*Restart*/
-int p_callback (sched_queue *node)
+int p_callback(sched_queue *node)
 {
 	struct task_struct *tsk;
 
@@ -196,7 +197,7 @@ static enum hrtimer_restart hrtimer_thread_callback(struct hrtimer *timer)
 
 
 
-int os_core_timer_init (void)
+int os_core_timer_init(void)
 {
 	pr_err("%s\n", __func__);
 	hrtimer_init(&core_tick, CLOCK_MONOTONIC, HRTIMER_MODE_REL_PINNED);
